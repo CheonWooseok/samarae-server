@@ -1,0 +1,25 @@
+useDotenv: true
+
+service: sanarae-server
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-northeast-2
+
+functions:
+  app:
+    handler: dist/lambda.handler
+    events:
+      - http:
+          method: any
+          path: '/'
+          cors: true
+      - http:
+          method: any
+          path: /{any+}
+          cors: true
